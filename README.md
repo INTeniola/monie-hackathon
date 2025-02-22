@@ -1,18 +1,18 @@
 # Moniepoint Analytics
 
-This is a project for the Moniepoint Hackathon (Feb 2025). It includes a backend built with Flask and a frontend built with React and TypeScript. It also includes an interactive python notebook where I tested my initial code. The main project submission is in the monie-shop-analytics folder, the other files and folders are included as a guide to the problem solving process.
+This is a project submission for the Moniepoint Hackathon. It includes a backend built with Flask and a frontend built with React and TypeScript. It also includes an interactive python notebook where I tested my initial code. The main project submission is in the monie-shop-analytics folder, the other files and folders are included as a guide to the problem solving process.
 
 ## Features
 - Analyzes sales data from Monieshop.
-- Displays metrics like highest sales volume, most sold product, etc.
+- Displays metrics like highest sales volume, most sold product, peak sales houretc.
 
 ## Tech Stack
 - **Frontend**:
-  - Vite (for fast builds and development)
-  - TypeScript (for type safety)
-  - React (for building the UI)
-  - shadcn-ui (for pre-built, customizable components)
-  - Tailwind CSS (for utility-first styling)
+  - Vite 
+  - TypeScript 
+  - React 
+  - shadcn-ui
+  - Tailwind CSS 
 - **Backend**:
   - Flask (Python web framework)
 
@@ -27,3 +27,6 @@ This is a project for the Moniepoint Hackathon (Feb 2025). It includes a backend
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/moniepoint-analytics.git
+   cd monie-shop-analytics
+   npm i
+   npm run dev

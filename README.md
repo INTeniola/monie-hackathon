@@ -1,6 +1,6 @@
 # Moniepoint Analytics
 
-This is a project for the Moniepoint Hackathon (Feb 2025). It includes a backend built with Flask and a frontend built with React and TypeScript.
+This is a project for the Moniepoint Hackathon (Feb 2025). It includes a backend built with Flask and a frontend built with React and TypeScript. It also includes an interactive python notebook where I tested my initial code. The main project submission is in the monie-shop-analytics folder, the other files and folders are included as a guide to the problem solving process.
 
 ## Features
 - Analyzes sales data from Monieshop.

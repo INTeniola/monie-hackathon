@@ -6,35 +6,29 @@ from collections import defaultdict, Counter
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)  #enables CORS for all routes
 
-
-
-# Helper function to parse a transaction line
 def parse_transaction(line):
     parts = line.strip().split(',')
     sales_staff_id = int(parts[0])
-    timestamp = parts[1]
-    
-    # Try parsing with seconds first, then without seconds
+    timestamp = parts[1]            #function to help parse transactions line by line
+
     try:
         transaction_time = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S')
     except ValueError:
-        transaction_time = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M')
+        transaction_time = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M')            #try-except block that parses with seconds included and then without seconds
     
     products = re.findall(r'(\d+):(\d+)', parts[2])
     sale_amount = float(parts[3])
     return sales_staff_id, transaction_time, products, sale_amount
 
-# Main function to process files and calculate metrics
 def process_transactions(folder_path):
     daily_sales_volume = defaultdict(int)
     daily_sales_value = defaultdict(float)
     product_sales = Counter()
     monthly_sales_staff = defaultdict(lambda: defaultdict(float))
-    hourly_transaction_volume = defaultdict(list)
+    hourly_transaction_volume = defaultdict(list)                #function to process files and calculate metrics regarding transactions
 
-    # Iterate over all files in the folder
     for filename in os.listdir(folder_path):
         if filename.endswith('.txt'):
             file_path = os.path.join(folder_path, filename)
@@ -57,14 +51,13 @@ def process_transactions(folder_path):
                     
                     # Hourly aggregation
                     hour = transaction_time.hour
-                    hourly_transaction_volume[hour].append(sum(int(qty) for _, qty in products))
+                    hourly_transaction_volume[hour].append(sum(int(qty) for _, qty in products))    #loop to iterate over all files in the folder
     
-    # Calculate metrics
     highest_sales_volume_day = max(daily_sales_volume.items(), key=lambda x: x[1])
     highest_sales_value_day = max(daily_sales_value.items(), key=lambda x: x[1])
     most_sold_product = product_sales.most_common(1)[0]
     highest_sales_staff_per_month = {month: max(staff_sales.items(), key=lambda x: x[1]) for month, staff_sales in monthly_sales_staff.items()}
-    highest_hour_by_avg_volume = max(hourly_transaction_volume.items(), key=lambda x: sum(x[1]) / len(x[1]))
+    highest_hour_by_avg_volume = max(hourly_transaction_volume.items(), key=lambda x: sum(x[1]) / len(x[1]))    #metrics calculation
     
     return {
         'highest_sales_volume_day': {
